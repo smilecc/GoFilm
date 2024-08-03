@@ -257,7 +257,7 @@ func GetBasicInfoBySearchInfos(infos ...SearchInfo) []MovieBasicInfo {
 	var list []MovieBasicInfo
 	for _, s := range infos {
 		searchCid := s.Cid
-		if searchCid = 0 {
+		if searchCid == 0 {
 			searchCid = s.Pid
 		}
 
