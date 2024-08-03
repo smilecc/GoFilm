@@ -412,8 +412,12 @@ func GetMovieListByPid(pid int64, page *Page) []MovieBasicInfo {
 	// 通过影片ID去redis中获取id对应数据信息
 	var list []MovieBasicInfo
 	for _, v := range s {
+		searchCid := v.Cid
+		if searchCid == 0 {
+			searchCid = v.Pid
+		}
 		// 通过key搜索指定的影片信息 , MovieDetail:Cid6:Id15441
-		list = append(list, GetBasicInfoByKey(fmt.Sprintf(config.MovieBasicInfoKey, v.Cid, v.Mid)))
+		list = append(list, GetBasicInfoByKey(fmt.Sprintf(config.MovieBasicInfoKey, searchCid, v.Mid)))
 	}
 	return list
 }
@@ -434,8 +438,12 @@ func GetMovieListByCid(cid int64, page *Page) []MovieBasicInfo {
 	// 通过影片ID去redis中获取id对应数据信息
 	var list []MovieBasicInfo
 	for _, v := range s {
+		searchCid := v.Cid
+		if searchCid == 0 {
+			searchCid = v.Pid
+		}
 		// 通过key搜索指定的影片信息 , MovieDetail:Cid6:Id15441
-		list = append(list, GetBasicInfoByKey(fmt.Sprintf(config.MovieBasicInfoKey, v.Cid, v.Mid)))
+		list = append(list, GetBasicInfoByKey(fmt.Sprintf(config.MovieBasicInfoKey, searchCid, v.Mid)))
 	}
 	return list
 }
