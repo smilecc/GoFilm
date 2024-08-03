@@ -85,7 +85,7 @@ func ApiGet(r *RequestInfo) {
 			// 将响应结构封装到 RequestInfo.Resp中
 			r.Resp = response.Body
 			// 拿到response后输出请求url
-			log.Println("请求成功: ", response.Request.URL)
+			// log.Println("请求成功: ", response.Request.URL)
 		} else {
 			r.Resp = []byte{}
 		}
