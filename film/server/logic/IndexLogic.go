@@ -62,8 +62,13 @@ func (i *IndexLogic) GetFilmDetail(id int) system.MovieDetailVo {
 	// 通过Id 获取影片search信息
 	search := system.SearchInfo{}
 	db.Mdb.Where("mid", id).First(&search)
+	searchCid := search.Cid
+	if searchCid == 0 {
+		searchCid = search.Pid
+	}
+
 	// 获取redis中的完整影视信息 MovieDetail:Cid11:Id24676
-	movieDetail := system.GetDetailByKey(fmt.Sprintf(config.MovieDetailKey, search.Cid, search.Mid))
+	movieDetail := system.GetDetailByKey(fmt.Sprintf(config.MovieDetailKey, searchCid, search.Mid))
 	var res = system.MovieDetailVo{MovieDetail: movieDetail}
 	//查找其他站点是否存在影片对应的播放源
 	res.List = multipleSource(&movieDetail)
