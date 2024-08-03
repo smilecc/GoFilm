@@ -808,7 +808,7 @@ func RecoverFilmSearch(cid int64) error {
 // DataCache  API请求 数据缓存
 func DataCache(key string, data map[string]interface{}) {
 	val, _ := json.Marshal(data)
-	db.Rdb.Set(db.Cxt, key, val, time.Minute*30)
+	db.Rdb.Set(db.Cxt, key, val, time.Minute*2)
 }
 
 // GetCacheData 获取API接口的缓存数据

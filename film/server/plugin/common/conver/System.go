@@ -12,6 +12,14 @@ import (
 // CovertFilmDetailVo 将 FilmDetailVo 转化为 MovieDetail
 func CovertFilmDetailVo(fd system.FilmDetailVo) (system.MovieDetail, error) {
 	t, err := time.ParseInLocation(time.DateTime, fd.AddTime, time.Local)
+	savePid := fd.Pid
+	saveCid := fd.Cid
+
+	if fd.Pid == 0 {
+		savePid = fd.Cid
+		saveCid = 0
+	}
+
 	md := system.MovieDetail{
 		Id:       fd.Id,
 		Cid:      fd.Cid,
