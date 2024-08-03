@@ -90,7 +90,7 @@ func ApiGet(r *RequestInfo) {
 		// 将请求url保存到RefererUrl 用于 Header Refer属性
 		RefererUrl = response.Request.URL.String()
 		// 拿到response后输出请求url
-		//log.Println("\n请求成功: ", response.Request.URL)
+		log.Println("请求成功: ", response.Request.URL)
 	})
 	// 处理请求参数
 	err := Client.Visit(fmt.Sprintf("%s?%s", r.Uri, r.Params.Encode()))
