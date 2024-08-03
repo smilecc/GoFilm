@@ -256,7 +256,12 @@ func GetDetailByKey(key string) MovieDetail {
 func GetBasicInfoBySearchInfos(infos ...SearchInfo) []MovieBasicInfo {
 	var list []MovieBasicInfo
 	for _, s := range infos {
-		data := []byte(db.Rdb.Get(db.Cxt, fmt.Sprintf(config.MovieBasicInfoKey, s.Cid, s.Mid)).Val())
+		searchCid := s.Cid
+		if searchCid = 0 {
+			searchCid = s.Pid
+		}
+
+		data := []byte(db.Rdb.Get(db.Cxt, fmt.Sprintf(config.MovieBasicInfoKey, searchCid, s.Mid)).Val())
 		basic := MovieBasicInfo{}
 		_ = json.Unmarshal(data, &basic)
 
