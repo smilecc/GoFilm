@@ -32,6 +32,8 @@ services:
       REDIS_PORT: 3662
     ports:
       - 3601:3601
+    volumes:
+      - /opt/film/data/upload:/opt/server/static/upload
     networks:
       - film-network
     depends_on:
@@ -52,6 +54,8 @@ services:
       MYSQL_DATABASE: FilmSite
     networks:
       - film-network
+    volumes:
+      - /opt/film/data/mysql:/var/lib/mysql
     command: [
           'mysqld',
           '--default-storage-engine=INNODB',
