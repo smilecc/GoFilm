@@ -373,6 +373,12 @@ func SearchInfoToMdb(model int) {
 		// 解析详情数据
 		info := SearchInfo{}
 		_ = json.Unmarshal([]byte(s.Member.(string)), &info)
+	
+		if info.Pid == 0 && info.Cid != 0 {
+			info.Pid = info.Cid
+			info.Cid = 0
+		}
+
 		sl = append(sl, info)
 	}
 	// 通过model执行对应的保存方法
