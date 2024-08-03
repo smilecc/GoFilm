@@ -22,8 +22,8 @@ func CovertFilmDetailVo(fd system.FilmDetailVo) (system.MovieDetail, error) {
 
 	md := system.MovieDetail{
 		Id:       fd.Id,
-		Cid:      fd.Cid,
-		Pid:      fd.Pid,
+		Cid:      saveCid,
+		Pid:      savePid,
 		Name:     fd.Name,
 		Picture:  fd.Picture,
 		DownFrom: fd.DownFrom,
