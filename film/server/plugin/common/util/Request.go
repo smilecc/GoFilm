@@ -84,13 +84,13 @@ func ApiGet(r *RequestInfo) {
 		if (response.StatusCode == 200 || (response.StatusCode >= 300 && response.StatusCode <= 399)) && len(response.Body) > 0 {
 			// 将响应结构封装到 RequestInfo.Resp中
 			r.Resp = response.Body
+			// 拿到response后输出请求url
+			log.Println("请求成功: ", response.Request.URL)
 		} else {
 			r.Resp = []byte{}
 		}
 		// 将请求url保存到RefererUrl 用于 Header Refer属性
 		RefererUrl = response.Request.URL.String()
-		// 拿到response后输出请求url
-		log.Println("请求成功: ", response.Request.URL)
 	})
 	// 处理请求参数
 	err := Client.Visit(fmt.Sprintf("%s?%s", r.Uri, r.Params.Encode()))
